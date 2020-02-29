@@ -1,0 +1,48 @@
+﻿@page
+@model MealPlanner.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Menu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Menu.CampID" class="control-label"></label>
+                <select asp-for="Menu.CampID" class ="form-control" asp-items="ViewBag.CampID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.Name" class="control-label"></label>
+                <input asp-for="Menu.Name" class="form-control" />
+                <span asp-validation-for="Menu.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.StartDate" class="control-label"></label>
+                <input asp-for="Menu.StartDate" class="form-control" />
+                <span asp-validation-for="Menu.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.EndDate" class="control-label"></label>
+                <input asp-for="Menu.EndDate" class="form-control" />
+                <span asp-validation-for="Menu.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
