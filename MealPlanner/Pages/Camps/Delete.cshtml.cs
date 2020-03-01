@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace MealPlanner
 {
-    public class MenuDeleteModel : PageModel
+    public class CampDeleteModel : PageModel
     {
         private readonly MealPlanner.Data.MealPlannerContext _context;
 
-        public MenuDeleteModel(MealPlanner.Data.MealPlannerContext context)
+        public CampDeleteModel(MealPlanner.Data.MealPlannerContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Menu Menu { get; set; }
+        public Camp Camp { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -25,10 +25,9 @@ namespace MealPlanner
                 return NotFound();
             }
 
-            Menu = await _context.Menus
-                .Include(m => m.Camp).FirstOrDefaultAsync(m => m.ID == id);
+            Camp = await _context.Camps.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Menu == null)
+            if (Camp == null)
             {
                 return NotFound();
             }
@@ -42,11 +41,11 @@ namespace MealPlanner
                 return NotFound();
             }
 
-            Menu = await _context.Menus.FindAsync(id);
+            Camp = await _context.Camps.FindAsync(id);
 
-            if (Menu != null)
+            if (Camp != null)
             {
-                _context.Menus.Remove(Menu);
+                _context.Camps.Remove(Camp);
                 await _context.SaveChangesAsync();
             }
 

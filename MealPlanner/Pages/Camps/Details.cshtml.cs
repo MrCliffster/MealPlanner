@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MealPlanner
 {
-    public class MenuDetailsModel : PageModel
+    public class CampDetailsModel : PageModel
     {
         private readonly MealPlanner.Data.MealPlannerContext _context;
 
-        public MenuDetailsModel(MealPlanner.Data.MealPlannerContext context)
+        public CampDetailsModel(MealPlanner.Data.MealPlannerContext context)
         {
             _context = context;
         }
 
-        public Menu Menu { get; set; }
+        public Camp Camp { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -24,10 +24,9 @@ namespace MealPlanner
                 return NotFound();
             }
 
-            Menu = await _context.Menus
-                .Include(m => m.Camp).FirstOrDefaultAsync(m => m.ID == id);
+            Camp = await _context.Camps.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Menu == null)
+            if (Camp == null)
             {
                 return NotFound();
             }

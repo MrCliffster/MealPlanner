@@ -6,21 +6,20 @@ using System.Threading.Tasks;
 
 namespace MealPlanner
 {
-    public class MenuIndexModel : PageModel
+    public class CampIndexModel : PageModel
     {
         private readonly MealPlanner.Data.MealPlannerContext _context;
 
-        public MenuIndexModel(MealPlanner.Data.MealPlannerContext context)
+        public CampIndexModel(MealPlanner.Data.MealPlannerContext context)
         {
             _context = context;
         }
 
-        public IList<Menu> Menu { get; set; }
+        public IList<Camp> Camp { get; set; }
 
         public async Task OnGetAsync()
         {
-            Menu = await _context.Menus
-                .Include(m => m.Camp).ToListAsync();
+            Camp = await _context.Camps.ToListAsync();
         }
     }
 }

@@ -1,24 +1,23 @@
 ﻿using MealPlanner.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MealPlanner
 {
-    public class MenuEditModel : PageModel
+    public class CampEditModel : PageModel
     {
         private readonly MealPlanner.Data.MealPlannerContext _context;
 
-        public MenuEditModel(MealPlanner.Data.MealPlannerContext context)
+        public CampEditModel(MealPlanner.Data.MealPlannerContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Menu Menu { get; set; }
+        public Camp Camp { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -27,14 +26,12 @@ namespace MealPlanner
                 return NotFound();
             }
 
-            Menu = await _context.Menus
-                .Include(m => m.Camp).FirstOrDefaultAsync(m => m.ID == id);
+            Camp = await _context.Camps.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Menu == null)
+            if (Camp == null)
             {
                 return NotFound();
             }
-            ViewData["CampID"] = new SelectList(_context.Camps, "ID", "ID");
             return Page();
         }
 
@@ -47,7 +44,7 @@ namespace MealPlanner
                 return Page();
             }
 
-            _context.Attach(Menu).State = EntityState.Modified;
+            _context.Attach(Camp).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +52,7 @@ namespace MealPlanner
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MenuExists(Menu.ID))
+                if (!CampExists(Camp.ID))
                 {
                     return NotFound();
                 }
@@ -68,9 +65,9 @@ namespace MealPlanner
             return RedirectToPage("./Index");
         }
 
-        private bool MenuExists(int id)
+        private bool CampExists(int id)
         {
-            return _context.Menus.Any(e => e.ID == id);
+            return _context.Camps.Any(e => e.ID == id);
         }
     }
 }
