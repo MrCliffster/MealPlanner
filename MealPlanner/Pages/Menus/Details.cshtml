@@ -1,5 +1,5 @@
 ﻿@page
-@model MealPlanner.MenuDetailsModel
+@model MealPlanner.Pages.Menus.MenuDetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -33,7 +33,29 @@
             @Html.DisplayNameFor(model => model.Menu.Camp)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Menu.Camp.ID)
+            @Html.DisplayFor(model => model.Menu.Camp.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Menu.Meals)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <th>Type</th>
+                    <th>Day</th>
+                </tr>
+                @foreach (var item in Model.Menu.Meals)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MealType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Day)
+                        </td>
+                    </tr>
+                }
+            </table>
         </dd>
     </dl>
 </div>

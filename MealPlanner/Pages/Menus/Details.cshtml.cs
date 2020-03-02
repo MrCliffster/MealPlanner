@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Menus
 {
     public class MenuDetailsModel : PageModel
     {
@@ -25,7 +25,11 @@ namespace MealPlanner
             }
 
             Menu = await _context.Menus
-                .Include(m => m.Camp).FirstOrDefaultAsync(m => m.ID == id);
+                .Include(m => m.Camp)
+                .Include(m => m.Meals)
+                .ThenInclude(m => m.MealRecipes)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (Menu == null)
             {

@@ -8,5 +8,6 @@ namespace MealPlanner.Pages.Menus
         public SelectList CampNameSL { get; set; }
 
         public void PopulateCampsDropDownList()
+        { }
     }
 }

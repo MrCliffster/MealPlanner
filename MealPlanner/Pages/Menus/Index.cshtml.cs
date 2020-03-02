@@ -15,12 +15,14 @@ namespace MealPlanner
             _context = context;
         }
 
-        public IList<Menu> Menu { get; set; }
+        public IList<Menu> Menus { get; set; }
 
         public async Task OnGetAsync()
         {
-            Menu = await _context.Menus
-                .Include(m => m.Camp).ToListAsync();
+            Menus = await _context.Menus
+                .Include(m => m.Camp)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }
