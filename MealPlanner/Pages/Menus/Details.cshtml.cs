@@ -27,7 +27,8 @@ namespace MealPlanner.Pages.Menus
             Menu = await _context.Menus
                 .Include(m => m.Camp)
                 .Include(m => m.Meals)
-                .ThenInclude(m => m.MealRecipes)
+                    .ThenInclude(m => m.MealRecipes)
+                        .ThenInclude(m => m.Recipe)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
 

@@ -28,15 +28,21 @@ namespace MealPlanner
         // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptyMenu = new Menu();
+
+            if (await TryUpdateModelAsync<Menu>(
+                emptyMenu,
+                "menu",
+                m => m.Name, m => m.StartDate, m => m.EndDate))
             {
-                return Page();
+                _context.Menus.Add(Menu);
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("./Index");
             }
 
-            _context.Menus.Add(Menu);
-            await _context.SaveChangesAsync();
+            return Page();
 
-            return RedirectToPage("./Index");
         }
     }
 }
