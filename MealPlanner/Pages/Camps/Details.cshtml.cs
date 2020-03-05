@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Camps
 {
     public class CampDetailsModel : PageModel
     {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Camps
 {
     public class CampIndexModel : PageModel
     {

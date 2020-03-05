@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Menus
 {
     public class MenuEditModel : PageModel
     {

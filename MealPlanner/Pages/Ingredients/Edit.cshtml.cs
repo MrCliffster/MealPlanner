@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MealPlanner.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MealPlanner.Data;
-using MealPlanner.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Ingredients
 {
     public class EditModel : PageModel
     {
@@ -37,7 +34,7 @@ namespace MealPlanner
             {
                 return NotFound();
             }
-           ViewData["IngredientCategoryID"] = new SelectList(_context.IngredientCategories, "IngredientCategoryID", "IngredientCategoryID");
+            ViewData["IngredientCategoryID"] = new SelectList(_context.IngredientCategories, "IngredientCategoryID", "IngredientCategoryID");
             return Page();
         }
 

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using MealPlanner.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MealPlanner.Data;
-using MealPlanner.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Ingredients
 {
     public class IndexModel : PageModel
     {
@@ -19,7 +15,7 @@ namespace MealPlanner
             _context = context;
         }
 
-        public IList<Ingredient> Ingredient { get;set; }
+        public IList<Ingredient> Ingredient { get; set; }
 
         public async Task OnGetAsync()
         {

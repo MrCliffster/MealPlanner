@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Menus
 {
     public class MenuIndexModel : PageModel
     {

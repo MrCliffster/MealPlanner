@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Menus
 {
     public class MenuCreateModel : PageModel
     {
-        private readonly MealPlanner.Data.MealPlannerContext _context;
+        private readonly Data.MealPlannerContext _context;
 
-        public MenuCreateModel(MealPlanner.Data.MealPlannerContext context)
+        public MenuCreateModel(Data.MealPlannerContext context)
         {
             _context = context;
         }

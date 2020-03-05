@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MealPlanner.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MealPlanner.Data;
-using MealPlanner.Models;
+using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Ingredients
 {
     public class CreateModel : PageModel
     {
-        private readonly MealPlanner.Data.MealPlannerContext _context;
+        private readonly Data.MealPlannerContext _context;
 
-        public CreateModel(MealPlanner.Data.MealPlannerContext context)
+        public CreateModel(Data.MealPlannerContext context)
         {
             _context = context;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["IngredientCategoryID"] = new SelectList(_context.IngredientCategories, "IngredientCategoryID", "IngredientCategoryID");
+            ViewData["IngredientCategoryID"] = new SelectList(_context.IngredientCategories, "IngredientCategoryID", "IngredientCategoryID");
             return Page();
         }
 
