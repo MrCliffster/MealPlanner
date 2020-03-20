@@ -1,12 +1,11 @@
 ﻿using MealPlanner.Models;
+using MealPlanner.Models.PlannerViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
 namespace MealPlanner.Pages.Menus
 {
-    public class MenuCreateModel : PageModel
+    public class MenuCreateModel : CampNamePageModel
     {
         private readonly Data.MealPlannerContext _context;
 
@@ -17,7 +16,8 @@ namespace MealPlanner.Pages.Menus
 
         public IActionResult OnGet()
         {
-            ViewData["CampID"] = new SelectList(_context.Camps, "ID", "ID");
+            PopulateCampsDropDownList(_context);
+            //ViewData["CampID"] = new SelectList(_context.Camps, "ID", "ID");
             return Page();
         }
 
@@ -33,7 +33,7 @@ namespace MealPlanner.Pages.Menus
             if (await TryUpdateModelAsync<Menu>(
                 emptyMenu,
                 "menu",
-                m => m.Name, m => m.StartDate, m => m.EndDate))
+                m => m.MenuName, m => m.StartDate, m => m.EndDate, m => m.CampID))
             {
                 _context.Menus.Add(Menu);
                 await _context.SaveChangesAsync();
@@ -41,6 +41,7 @@ namespace MealPlanner.Pages.Menus
                 return RedirectToPage("./Index");
             }
 
+            PopulateCampsDropDownList(_context, emptyMenu.CampID);
             return Page();
 
         }

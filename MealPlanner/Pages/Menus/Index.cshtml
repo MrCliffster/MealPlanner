@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Menus[0].Name)
+                @Html.DisplayNameFor(model => model.Menus[0].MenuName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Menus[0].StartDate)
@@ -32,7 +32,7 @@
 @foreach (var item in Model.Menus) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.MenuName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)

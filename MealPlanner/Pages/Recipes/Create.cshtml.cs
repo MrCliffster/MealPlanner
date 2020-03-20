@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MealPlanner.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using MealPlanner.Data;
-using MealPlanner.Models;
+using System.Threading.Tasks;
 
-namespace MealPlanner
+namespace MealPlanner.Pages.Recipes
 {
     public class CreateModel : PageModel
     {
-        private readonly MealPlanner.Data.MealPlannerContext _context;
+        private readonly Data.MealPlannerContext _context;
 
-        public CreateModel(MealPlanner.Data.MealPlannerContext context)
+        public CreateModel(Data.MealPlannerContext context)
         {
             _context = context;
         }
@@ -26,6 +21,9 @@ namespace MealPlanner
 
         [BindProperty]
         public Recipe Recipe { get; set; }
+
+        [BindProperty]
+        public IngredientEntry ingredientEntry { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

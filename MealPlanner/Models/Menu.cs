@@ -9,7 +9,8 @@ namespace MealPlanner.Models
     {
         public int ID { get; set; }
         public int CampID { get; set; }
-        public string Name { get; set; }
+        [Display(Name = "Name")]
+        public string MenuName { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }

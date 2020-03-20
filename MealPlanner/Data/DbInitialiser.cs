@@ -14,8 +14,15 @@ namespace MealPlanner.Data
             if (context.Menus.Any())
                 return; // DB has been seeded
 
-            var fakeCamp = new Camp { Name = "Fake Camp" };
-            var straddy = new Camp { Name = "Stradbroke Cup" };
+            var fakeCamp = new Camp
+            {
+                Name = "Fake Camp"
+            };
+
+            var straddy = new Camp
+            {
+                Name = "Stradbroke Cup"
+            };
 
             var camps = new Camp[]
             {
@@ -30,8 +37,8 @@ namespace MealPlanner.Data
 
             var menus = new Menu[]
             {
-                new Menu{Name="Tristan's First Menu", StartDate=DateTime.Parse("2020-03-02"), EndDate=DateTime.Parse("2020-03-04"), CampID = fakeCamp.ID},
-                new Menu{Name="Straddy 2020", StartDate=DateTime.Parse("2020-04-10"), EndDate=DateTime.Parse("2020-04-14"), CampID = straddy.ID}
+                new Menu{MenuName="Tristan's First Menu", StartDate=DateTime.Parse("2020-03-02"), EndDate=DateTime.Parse("2020-03-04"), CampID = fakeCamp.ID},
+                new Menu{MenuName="Straddy 2020", StartDate=DateTime.Parse("2020-04-10"), EndDate=DateTime.Parse("2020-04-14"), CampID = straddy.ID}
             };
 
             foreach (var menu in menus)
