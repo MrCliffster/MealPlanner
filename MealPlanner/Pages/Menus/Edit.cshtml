@@ -15,14 +15,14 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Menu.ID" />
             <div class="form-group">
-                <label asp-for="Menu.CampID" class="control-label"></label>
-                <select asp-for="Menu.CampID" class="form-control" asp-items="ViewBag.CampID"></select>
-                <span asp-validation-for="Menu.CampID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Menu.MenuName" class="control-label"></label>
                 <input asp-for="Menu.MenuName" class="form-control" />
                 <span asp-validation-for="Menu.MenuName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Menu.Camp" class="control-label"></label>
+                <select asp-for="Menu.CampID" class="form-control" asp-items="@Model.CampNameSL"></select>
+                <span asp-validation-for="Menu.CampID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Menu.StartDate" class="control-label"></label>

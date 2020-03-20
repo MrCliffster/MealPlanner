@@ -1,18 +1,17 @@
 ﻿using MealPlanner.Models;
+using MealPlanner.Models.PlannerViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace MealPlanner.Pages.Menus
 {
-    public class MenuEditModel : PageModel
+    public class MenuEditModel : CampNamePageModel
     {
-        private readonly MealPlanner.Data.MealPlannerContext _context;
+        private readonly Data.MealPlannerContext _context;
 
-        public MenuEditModel(MealPlanner.Data.MealPlannerContext context)
+        public MenuEditModel(Data.MealPlannerContext context)
         {
             _context = context;
         }
@@ -34,38 +33,38 @@ namespace MealPlanner.Pages.Menus
             {
                 return NotFound();
             }
-            ViewData["CampID"] = new SelectList(_context.Camps, "ID", "ID");
+            PopulateCampsDropDownList(_context, Menu.CampID);
             return Page();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Menu).State = EntityState.Modified;
+            var menuToUpdate = await _context.Menus.FindAsync(id);
 
-            try
+            if (menuToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync(
+                menuToUpdate,
+                "menu", // Prefix for form value.
+                m => m.MenuName, m => m.CampID, m => m.StartDate, m => m.EndDate))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MenuExists(Menu.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
+            // Select CampID if TryUpdateModelAsync fails.
+            PopulateCampsDropDownList(_context, Menu.CampID);
+            return Page();
         }
 
         private bool MenuExists(int id)

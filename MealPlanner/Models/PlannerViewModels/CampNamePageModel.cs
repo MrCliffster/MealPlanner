@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace MealPlanner.Models.PlannerViewModels
 {
+    /// <summary>
+    /// Class used to populate camp names in dropdown lists
+    /// </summary>
     public class CampNamePageModel : PageModel
     {
         public SelectList CampNameSL { get; set; }
@@ -16,7 +19,7 @@ namespace MealPlanner.Models.PlannerViewModels
                              orderby c.Name
                              select c;
 
-            CampNameSL = new SelectList(campsQuery.AsNoTracking(), "ID", "Name");
+            CampNameSL = new SelectList(campsQuery.AsNoTracking(), "ID", "Name", selectedCamp);
         }
     }
 }
