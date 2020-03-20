@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MealPlanner.Models
 {
@@ -32,6 +29,7 @@ namespace MealPlanner.Models
         public bool LactoseFree { get; set; }
 
         // Navigation properties
+        [Display(Name = "Ingredient Category")]
         public IngredientCategory IngredientCategory { get; set; }
         public ICollection<Ingredient> Substitutions { get; set; }
     }

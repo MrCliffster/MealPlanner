@@ -14,8 +14,8 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Ingredient.IngredientCategoryID" class="control-label"></label>
-                <select asp-for="Ingredient.IngredientCategoryID" class ="form-control" asp-items="ViewBag.IngredientCategoryID"></select>
+                <label asp-for="Ingredient.IngredientCategory" class="control-label"></label>
+                <select asp-for="Ingredient.IngredientCategoryID" class ="form-control" asp-items="@Model.IngredientNameSL"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Ingredient.Name" class="control-label"></label>

@@ -1,12 +1,11 @@
 ﻿using MealPlanner.Models;
+using MealPlanner.Models.PlannerViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
 namespace MealPlanner.Pages.Ingredients
 {
-    public class CreateModel : PageModel
+    public class CreateModel : IngredientCategoryNamePageModel
     {
         private readonly Data.MealPlannerContext _context;
 
@@ -17,7 +16,7 @@ namespace MealPlanner.Pages.Ingredients
 
         public IActionResult OnGet()
         {
-            ViewData["IngredientCategoryID"] = new SelectList(_context.IngredientCategories, "IngredientCategoryID", "IngredientCategoryID");
+            PopulateIngredientCategories(_context);
             return Page();
         }
 
