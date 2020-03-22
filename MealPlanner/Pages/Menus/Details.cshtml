@@ -57,6 +57,24 @@
                     </tr>
                 }
             </table>
+            <div>
+                <button onclick="$('#addMeal').show()">Add Meal</button>
+            </div>
+            <div id="addMeal" style="display:none">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="@Model.MealToCreate.Day" class="control-label"></label>
+                        <input asp-for="@Model.MealToCreate.Day" class="form-control"/>
+                        <span asp-validation-for="@Model.MealToCreate.Day" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.MealToCreate.MealType" class="control-label"></label>
+                        <input asp-for="@Model.MealToCreate.MealType" class="form-control"/>
+                        <span asp-validation-for="@Model.MealToCreate.MealType" class="text-danger"></span>
+                    </div>
+                    <input type="submit" value="Save Meal" asp-page-handler="SaveMeal" />
+                </form>
+            </div>
         </dd>
     </dl>
 </div>

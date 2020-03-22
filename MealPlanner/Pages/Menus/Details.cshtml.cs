@@ -8,14 +8,15 @@ namespace MealPlanner.Pages.Menus
 {
     public class MenuDetailsModel : PageModel
     {
-        private readonly MealPlanner.Data.MealPlannerContext _context;
+        private readonly Data.MealPlannerContext _context;
 
-        public MenuDetailsModel(MealPlanner.Data.MealPlannerContext context)
+        public MenuDetailsModel(Data.MealPlannerContext context)
         {
             _context = context;
         }
 
         public Menu Menu { get; set; }
+        public Meal MealToCreate { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,6 +37,23 @@ namespace MealPlanner.Pages.Menus
             {
                 return NotFound();
             }
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostSaveMeal()
+        {
+            var emptyMeal = new Meal();
+            if (await TryUpdateModelAsync<Meal>(
+                emptyMeal,
+                "meal",
+                m => m.Day, m => m.MealType))
+            {
+                _context.Meals.Add(MealToCreate);
+                await _context.SaveChangesAsync();
+
+                return RedirectToPage("#");
+            }
+
             return Page();
         }
     }
