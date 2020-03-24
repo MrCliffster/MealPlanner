@@ -18,6 +18,7 @@ namespace MealPlanner.Models
         public int ID { get; set; }
         public int MenuID { get; set; }
         [Required]
+        [Display(Name = "Meal Type")]
         public MealType MealType { get; set; }
         [Required]
         public DayOfWeek Day { get; set; }
