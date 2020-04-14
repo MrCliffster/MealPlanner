@@ -16,6 +16,7 @@ namespace MealPlanner.Pages.Menus
         }
 
         public Menu Menu { get; set; }
+        [BindProperty]
         public Meal MealToCreate { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -46,7 +47,7 @@ namespace MealPlanner.Pages.Menus
             if (await TryUpdateModelAsync<Meal>(
                 emptyMeal,
                 "meal",
-                m => m.Day, m => m.MealType))
+                m => m.Day, m => m.MealType, m => m.MenuID))
             {
                 _context.Meals.Add(MealToCreate);
                 await _context.SaveChangesAsync();
