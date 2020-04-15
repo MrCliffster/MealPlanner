@@ -64,7 +64,9 @@
                 <form method="post">
                     <div class="form-group">
                         <label asp-for="@Model.MealToCreate.Day" class="control-label"></label>
-                        <input asp-for="@Model.MealToCreate.Day" class="form-control"/>
+                        <select asp-for="@Model.MealToCreate.Day" asp-items="Html.GetEnumSelectList<DayOfWeek>()" class="form-control">
+                            <option value="">Choose a day</option>    
+                        </select>
                         <span asp-validation-for="@Model.MealToCreate.Day" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -72,6 +74,7 @@
                         <input asp-for="@Model.MealToCreate.MealType" class="form-control"/>
                         <span asp-validation-for="@Model.MealToCreate.MealType" class="text-danger"></span>
                     </div>
+                    <input type="hidden" name="id" value="@Model.Menu.ID" />
                     <input type="submit" value="Save Meal" asp-page-handler="SaveMeal" />
                 </form>
             </div>

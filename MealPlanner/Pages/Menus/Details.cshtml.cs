@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Threading.Tasks;
 
 namespace MealPlanner.Pages.Menus
@@ -41,13 +42,21 @@ namespace MealPlanner.Pages.Menus
             return Page();
         }
 
-        public async Task<IActionResult> OnPostSaveMeal()
+        public async Task<IActionResult> OnPostSaveMeal(int? id)
         {
-            var emptyMeal = new Meal();
+            if (id == null)
+            {
+                throw new Exception("Bad call of this method.");
+            }
+            Menu = await _context.Menus.AsNoTracking().FirstOrDefaultAsync(m => m.ID == id);
+            var emptyMeal = new Meal
+            {
+                MenuID = Menu.ID
+            };
             if (await TryUpdateModelAsync<Meal>(
                 emptyMeal,
                 "meal",
-                m => m.Day, m => m.MealType, m => m.MenuID))
+                m => m.Day, m => m.MealType))
             {
                 _context.Meals.Add(MealToCreate);
                 await _context.SaveChangesAsync();
@@ -55,7 +64,7 @@ namespace MealPlanner.Pages.Menus
                 return RedirectToPage("#");
             }
 
-            return Page();
+            return await OnGetAsync(id);
         }
     }
 }
